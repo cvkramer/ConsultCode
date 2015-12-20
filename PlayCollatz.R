@@ -6,13 +6,15 @@ isOdd <- function(int){
   }
 }
 
-printCollatz <- function(int,end,rep=0){
-  if(rep==end){stop('Completed Function. \n\n')}
+printCollatz <- function(int,prev=c(0,0,0),rep=0){
+  end <- c(4,2,1)
+  if(sum(prev==end)==3){return("done")}
   if(isOdd(int)){
     new <- 3*int+1
   }else{
     new <- int/2
   }
   print(int)
-  printCollatz(new,end,rep+1)
+  prev <- c(prev[2],prev[3],new)
+  printCollatz(new,prev,rep+1)
 }
