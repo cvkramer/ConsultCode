@@ -6,15 +6,30 @@ isOdd <- function(int){
   }
 }
 
-printCollatz <- function(int,prev=c(0,0,0),rep=0){
-  end <- c(4,2,1)
-  if(sum(prev==end)==3){return("done")}
+findNewMax <- function(vec){
+  max <- 0
+  for(i in 1:length(vec)){
+    if(vec[[i]] > max){print(paste(i,":",vec[[i]]));max <- vec[[i]]}
+    
+  }
+}
+
+printCollatz <- function(int,rep=0){
+  if(int==8){return(rep)}
   if(isOdd(int)){
     new <- 3*int+1
   }else{
     new <- int/2
   }
-  print(int)
-  prev <- c(prev[2],prev[3],new)
-  printCollatz(new,prev,rep+1)
+  #print(int)
+  printCollatz(new,rep+1)
 }
+
+reps <- 10000
+x <- c(8:reps)
+y <- as.vector(lapply(x,printCollatz))
+plot(x,y)
+
+findNewMax(y)
+
+
