@@ -21,7 +21,7 @@ findNewMax <- function(vec){
 }
 
 printCollatz <- function(int,rep=0,isodd=0,iseven=0){
-  if(int==8){return(c(rep,isodd,iseven))}#return(list(iter=rep,oddstep=isodd,evenstep=iseven))
+  if(int == 8){return(c(rep,isodd,iseven))}#return(list(iter=rep,oddstep=isodd,evenstep=iseven))
   if(isOdd(int)){
     new <- 3*int+1
     isodd = isodd+1
@@ -35,13 +35,13 @@ printCollatz <- function(int,rep=0,isodd=0,iseven=0){
 
 reps <- 1000
 x <- c(8:reps)
-output <- as.data.frame(NA,nrow=I(reps-8),ncol=4)
+output <- as.data.frame(matrix(rep(NA,nrow=4*(reps-8)),ncol=4))
 for(i in 8:reps){
-  out <- printCollatz(i);
-  output$i[i-7,1] <- i ;
-  output$rep[i-7,2] <-  out[1];
-  output$odd[i-7,3] <- out[2];
-  output$even[i-7,4] <- out[3];
+  out <- printCollatz(x[i]);
+  output[i-7,1] <- i ;
+  output[i-7,2] <-  out[1];
+  output[i-7,3] <- out[2];
+  output[i-7,4] <- out[3];
 }
 
 lapply(x,printCollatz)[[2]]
